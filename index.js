@@ -47,9 +47,13 @@ async function run() {
       const serviceData = req.body;
       const result = await serviceCollection.insertOne(serviceData)
       res.send(result)
-      console.log(result);
-    })
-
+    });
+    
+    app.get("/service", async (req, res) => {
+      const cursor = serviceCollection.find({});
+      const result = await cursor.toArray();
+      res.send(result);
+    });
     
       
 
