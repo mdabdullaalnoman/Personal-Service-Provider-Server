@@ -15,19 +15,6 @@ const port = process.env.PORT || 5000;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ne473.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-async function verifyToken(req, res, next) {
-  if (req.headers?.authorization?.startsWith('Bearer ')) {
-    const idToken = req.headers.authorization.split('Bearer ')[1];
-    try {
-      const decodedUser = await admin.auth().verifyIdToken(idToken);
-      req.decodedUserEmail = decodedUser.email;
-    }
-    catch {
-
-    }
-  }
-  next();
-}
 
 async function run() {
   try {
